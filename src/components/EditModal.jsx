@@ -103,7 +103,7 @@ const EditModal = ({ isOpen, onClose, onSave, onDelete, initialEvent }) => {
           </label>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <label className="min-w-0 text-sm font-semibold text-slate-700">
+            <label className="block min-w-0 text-sm font-semibold text-slate-700">
               Start time
               <input
                 type="time"
@@ -112,10 +112,10 @@ const EditModal = ({ isOpen, onClose, onSave, onDelete, initialEvent }) => {
                   setFormState((prev) => ({ ...prev, time: event.target.value }))
                 }
                 required
-                className="mt-2 w-full max-w-full min-w-0 rounded-2xl border border-slate-200 bg-white/70 px-4 py-3 text-sm text-slate-900 focus:border-slate-400 focus:outline-none"
+                className="mt-2 box-border w-full min-w-0 max-w-none overflow-hidden rounded-2xl border border-slate-200 bg-white/70 px-3 py-3 text-sm text-slate-900 focus:border-slate-400 focus:outline-none"
               />
             </label>
-            <label className="min-w-0 text-sm font-semibold text-slate-700">
+            <label className="block min-w-0 text-sm font-semibold text-slate-700">
               End time
               <input
                 type="time"
@@ -124,7 +124,7 @@ const EditModal = ({ isOpen, onClose, onSave, onDelete, initialEvent }) => {
                   setFormState((prev) => ({ ...prev, endTime: event.target.value }))
                 }
                 required
-                className="mt-2 w-full max-w-full min-w-0 rounded-2xl border border-slate-200 bg-white/70 px-4 py-3 text-sm text-slate-900 focus:border-slate-400 focus:outline-none"
+                className="mt-2 box-border w-full min-w-0 max-w-none overflow-hidden rounded-2xl border border-slate-200 bg-white/70 px-3 py-3 text-sm text-slate-900 focus:border-slate-400 focus:outline-none"
               />
             </label>
           </div>
