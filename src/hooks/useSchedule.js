@@ -110,7 +110,40 @@ export const useSchedule = () => {
   };
 
   const resetSchedule = () => {
-    setSchedule(normalizeSchedule(cloneSchedule(INITIAL_SCHEDULE)));
+    setSchedule((prev) => {
+      const baseline = cloneSchedule(INITIAL_SCHEDULE);
+      const next = {};
+
+      Object.entries(baseline).forEach(([day, events]) => {
+        const baseEvents = Array.isArray(events) ? events : [];
+        const baseIds = new Set(baseEvents.map((event) => event.id));
+        const extraEvents = (prev?.[day] || []).filter(
+          (event) => event && !baseIds.has(event.id),
+        );
+        next[day] = [...baseEvents, ...extraEvents]
+          .map((event) => ({
+            ...event,
+            completed: Boolean(event.completed),
+          }))
+          .sort((a, b) => a.time.localeCompare(b.time));
+      });
+
+      Object.entries(prev || {}).forEach(([day, events]) => {
+        if (next[day]) {
+          return;
+        }
+
+        const safeEvents = Array.isArray(events) ? events : [];
+        next[day] = [...safeEvents]
+          .map((event) => ({
+            ...event,
+            completed: Boolean(event.completed),
+          }))
+          .sort((a, b) => a.time.localeCompare(b.time));
+      });
+
+      return next;
+    });
   };
 
   return {
