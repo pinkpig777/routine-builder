@@ -35,6 +35,14 @@
   #root {
     min-height: 100vh;
   }
+
+  input[type='time'] {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-inline-size: 0;
+  }
 }
 
 @layer components {
