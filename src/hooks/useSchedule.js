@@ -123,7 +123,7 @@ export const useSchedule = () => {
         next[day] = [...baseEvents, ...extraEvents]
           .map((event) => ({
             ...event,
-            completed: Boolean(event.completed),
+            completed: false,
           }))
           .sort((a, b) => a.time.localeCompare(b.time));
       });
@@ -137,7 +137,7 @@ export const useSchedule = () => {
         next[day] = [...safeEvents]
           .map((event) => ({
             ...event,
-            completed: Boolean(event.completed),
+            completed: false,
           }))
           .sort((a, b) => a.time.localeCompare(b.time));
       });
