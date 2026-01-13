@@ -1,7 +1,11 @@
 import { Plus } from 'lucide-react';
+import { useMemo } from 'react';
 import EventCard from './EventCard';
+import { findTimeConflicts } from '../utils/helpers';
 
 const EventList = ({ day, events, onAdd, onEdit, onToggle }) => {
+  const conflictIds = useMemo(() => findTimeConflicts(events), [events]);
+
   return (
     <section className="glass-panel flex flex-col gap-4 px-6 py-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -26,7 +30,12 @@ const EventList = ({ day, events, onAdd, onEdit, onToggle }) => {
         <div className="flex flex-col gap-4">
           {events.map((event, index) => (
             <div key={event.id} className="animate-rise" style={{ animationDelay: `${index * 40}ms` }}>
-              <EventCard event={event} onToggle={onToggle} onEdit={onEdit} />
+              <EventCard 
+                event={event} 
+                onToggle={onToggle} 
+                onEdit={onEdit}
+                hasConflict={conflictIds.includes(event.id)}
+              />
             </div>
           ))}
         </div>
